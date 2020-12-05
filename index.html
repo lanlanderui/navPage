@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单的导航页面</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header></header>
+    <main>
+        <div id="wall">
+            
+        </div>
+    </main>
+    <footer></footer>
+    <script>
+        var key = {
+            '0':{0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
+            '1':{0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
+            '2':{0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
+            'length':3
+        }
+
+        var hash = {
+            'q':'https://www.qq.com',
+            'w':'https://www.weibo.com/',
+            'e':'https://www.baidu.com',
+            'r':'https://www.runoob.com/',
+            't':'https://www.taobao.com',
+            'y':'http://www.youdao.com/',
+            'u':undefined,
+            'i':undefined,
+            'o':undefined,
+            'p':undefined,
+            'a':undefined,
+            's':'https://www.sohu.com',
+            'z':'https://www.zhihu.com',
+            'm':'https://www.miui.com'
+            // hash不用length
+        }
+        var index = 0
+        while(index<key['length']){
+            div1 = document.createElement('div') //创建标签
+            wall.appendChild(div1)              //插入标签
+           var index2 = 0
+            while(index2<key[index].length){
+                kbd = document.createElement('kbd')
+                kbd.textContent = key[index][index2]       //使kbd里面的文字内容为
+                btn = document.createElement('button')
+                btn.textContent = 'edit'
+                kbd.appendChild(btn)
+                div1.appendChild(kbd)
+                index2 = index2+1
+            }
+            index = index+1
+        }
+        document.onkeypress = function(userPress) {
+            key = userPress['key']      //监听到的用户按下的key
+            website = hash[key]         //将监听到的key和哈希里的值对应起来
+            // location.href = website     在当前窗口打开
+            window.open(website,'_blank') //从新的窗口打开标签页
+        }
+        //让用户可以自定义网址
+    </script>
+</body>
+</html>
