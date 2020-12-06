@@ -39,6 +39,12 @@
             'm':'https://www.miui.com'
             // hash不用length
         }
+        //取出localStorage中userWebsite中对应的hash
+        var hashInLocalStorage = JSON.parse(localStorage.getItem('userWebsite')||'null')//因为存的时候是字符串，所以拿出来的时候也是字符串,所以要转换
+        if(hashInLocalStorage){
+            hash = hashInLocalStorage
+        }
+
         var index = 0
         while(index<key['length']){
             div1 = document.createElement('div') //创建标签
@@ -49,6 +55,18 @@
                 kbd.textContent = key[index][index2]       //使kbd里面的文字内容为
                 btn = document.createElement('button')
                 btn.textContent = 'edit'
+                btn.id = key[index][index2]
+                btn.onclick = function(userPress){
+                // btn是一个容器，只有一个，但里面的内容在变化，最后一个内容留在容器里，之前的内容已经放到页面里了
+                //这里userPress 没有包含button的信息，不能像下面一样
+                newWebsite = 'https://'+prompt('请输入新的网址') 
+                //让用户可以自定义网址   //target 即是用户点击的key
+                key = userPress['target']['id']
+                hash[key] = newWebsite     //hash变更
+                localStorage.setItem('userWebsite',JSON.stringify(hash))//一变更就储存起来
+                 //localStorage中有很多桶，只能存字符串
+                console.log(hash)
+            }                                           //写在循环体里面不能写在外面
                 kbd.appendChild(btn)
                 div1.appendChild(kbd)
                 index2 = index2+1
@@ -62,6 +80,15 @@
             window.open(website,'_blank') //从新的窗口打开标签页
         }
         //让用户可以自定义网址
+        // btn.onclick = function(userPress){
+        //     console.log('被点击了');
+        // }  写在外面无效。。。为啥呀
+
+        //刷新页面后，已经编辑的网址就会重置，所以我们需要额外的地方来备份已经编辑的网址
+        //当用户刷新页面的时候就让备份的网址，覆盖到新的页面中
+
+        
+
     </script>
 </body>
 </html>
