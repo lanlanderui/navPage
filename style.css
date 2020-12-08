@@ -1,20 +1,29 @@
 * {margin:0;padding:0;}
+body {
+    background-color: #e7e7e7;
+}
 #wall{
     padding-top:100px;
     text-align: center;
 }
 
+#wall div {
+    margin-bottom: 23px;
+}
 #wall div kbd {
     position: relative;
     display: inline-block;
-    border: 1px solid red;
-    margin-right: -1px;
-    margin-bottom: -1px;
+    border-bottom: 1px solid #5d5d5d;
+    border-top: .5px solid #d1d0d0;
+    margin: 0 11px;
     font-size: 20px;
     font-weight: 700;
-    width: 50px;
-    height: 50px;
+    width: 90px;
+    height: 70px;
     line-height: 35px;
+    box-shadow:0px 2px .1px 1px rgb(161,47,47), inset 0px -3px 0px 0px rgb(228, 107, 107);
+    background-color: #a12f2f;
+    border-radius: 8px;
 }
 #wall div kbd button {
     position: absolute;
@@ -26,6 +35,5 @@
     display: none;
 }
 #wall div kbd:hover button {
-    transition: .5s;
     display: block;
 }
