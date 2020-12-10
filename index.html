@@ -15,7 +15,7 @@
     <footer></footer>
     <script>
         var key = {
-            '0':{0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
+            '0':{0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p','length':10},
             '1':{0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
             '2':{0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
             'length':3
@@ -65,14 +65,19 @@
                 hash[key] = newWebsite     //hash变更
                 localStorage.setItem('userWebsite',JSON.stringify(hash))//一变更就储存起来
                  //localStorage中有很多桶，只能存字符串
-                console.log(hash)
-            }                                           //写在循环体里面不能写在外面
+
+                img = document.createElement('img')
+                img.sec = hash[key]+'/favicon.ico'
+                kbd.appendChild(img)
                 kbd.appendChild(btn)
                 div1.appendChild(kbd)
-                index2 = index2+1
+                
+                }  
+                index2 = index2+1;                                         //写在循环体里面不能写在外面     
             }
             index = index+1
         }
+        
         document.onkeypress = function(userPress) {
             key = userPress['key']      //监听到的用户按下的key
             website = hash[key]         //将监听到的key和哈希里的值对应起来
