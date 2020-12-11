@@ -36,20 +36,20 @@ var keys = {
     2:{0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
     length:3
 }
-var hash ={q:'qq.com',w:'weibo.com',e:undefined,r:undefined,t:'taobao.com',y:'youku.ocm',u:undefined,i:undefined,o:undefined,p:undefined,a:'agefans.net',s:'souhu.com',d:undefined,f:undefined,g:'google.com',h:undefined,j:'jianshu.com',k:'kugou.com',l:undefined,z:'zhihu.com',x:undefined,c:undefined,v:undefined,b:'bilibili.com',n:undefined,m:undefined,length:26
-
-}
+var hash ={q:'qq.com',w:'weibo.com',e:undefined,r:undefined,t:'taobao.com',y:'youku.ocm',u:undefined,i:undefined,o:undefined,
+p:undefined,a:'agefans.net',s:'souhu.com',d:undefined,f:undefined,g:'google.com',h:undefined,j:'jianshu.com',k:'kugou.com',l:undefined,
+z:'zhihu.com',x:undefined,c:undefined,v:undefined,b:'bilibili.com',n:undefined,m:undefined,length:26}
 //取出localStorage中userWebsite中对应的hash
 var hashInLocalStorage = JSON.parse(localStorage.getItem('custom')||'null')//因为存的时候是字符串，所以拿出来的时候也是字符串,所以要转换
 if(hashInLocalStorage){
     hash = hashInLocalStorage;
 }
 
-var index=0;        //创建三行div，keys里0，1，2
+var index=0;                                            //创建三行div，keys里0，1，2
 while(index<keys['length']){
     var div=document.createElement('div');
     wall.appendChild(div);
-
+    
     for(var row=0;row<keys[index]['length'];row++){     //keys[index].length 10  9  7
         var kbd=document.createElement('kbd');          //每行div里创建数个kbd
         kbd.textContent=keys[index][row];               //keys[index][row]表示每一行div里的元素    
@@ -57,27 +57,54 @@ while(index<keys['length']){
         
         //添加button
         var btn=document.createElement('button');
-        btn.textContent='E';
+        btn.textContent='e';
         btn.id=keys[index][row];
         kbd.appendChild(btn);
 
-        //点击button 自定义网页
-        btn.onclick = function(edit){
-        var custom = prompt("请输入网址");
-        var key = edit['target']['id'];
-        hash[key]=custom;                              //hash值变更
-        localStorage.setItem('custom',JSON.stringify(hash))    //hash一变更就储存起来
+        //添加网站图标
+        var img = document.createElement('img');
+        if(hash[keys[index][row]]){
+            img.src='https://www.'+hash[keys[index][row]]+'/favicon.ico';   //keys[index][row]表示每一行div里的元素就是qwe...
+        }else{
+            img.src='//i.loli.net/2020/12/11/Se8PrcbZXg72mQi.png'
+            img.style.width='10px';
+            img.style.height='10px';
         }
+        //如果网站图标出现错误
+        img.onerror = function(imgError) {
+            imgError.target.src='//i.loli.net/2020/12/11/Se8PrcbZXg72mQi.png';
+            imgError.target.style.width='10px';
+            imgError.target.style.height='10px';
+        }
+        kbd.appendChild(img);
+
+        //点击button 自定义网页，同时更新icon
+        btn.onclick = function(edit){
+        var button2 = edit['target']; 
+        var img2 = button2.previousSibling;
+        var key = button2['id'];                                 //qwe
+        var custom = prompt("请输入网址");                       //输入一个网址
+        hash[key]=custom;                                        //hash变更
+        img2.src = 'https://www.'+custom+'/favicon.ico';
+        img2.onerror = function(img2Error) {
+            img2Error.target.src='//i.loli.net/2020/12/11/Se8PrcbZXg72mQi.png';
+            img2Error.target.style.width='10px';
+            img2Error.target.style.height='10px';
+        }
+        localStorage.setItem('custom',JSON.stringify(hash));                  //hash一变更就储存起来
+        }
+        
+        //打开网站
+        document.onkeypress=function(userPress){
+        var key=userPress['key'];                          //获取用户当前按下的键
+        website = hash[key];                               //获取用户按下的当前key对应的网址
+        window.open('https://'+website,'_blank')           //打开获取的网址
+}
     }
     index++;
 }
 
-//打开网站
-document.onkeypress=function(userpress){
-    var key=userpress['key'];                          //获取用户当前按下的键
-    website = hash[key];                               //获取用户按下的当前key对应的网址
-    window.open('https://'+website,'_blank')           //打开获取的网址
-}
+
 
 
 </script>
