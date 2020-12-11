@@ -13,7 +13,8 @@ body{
 
 header {
     width: 100%;
-    background-color: rgb(195, 200, 147);
+    background-color: rgb(207, 78, 78);
+    box-shadow:0px 5px 10px 0px rgb(134, 54, 54);
 }
 header .logo {
     float:left;
@@ -22,13 +23,33 @@ header .logo {
     margin-left: 100px;
 }
 header .search {
+    margin-right: 100px;
     float: right;
+    padding-top: 22px;
+}
+header .search input {
+    border: none;
+    outline: none;
+    margin-right: 10px;
+}
+header .search .searchBtn {
+    padding: 3px;
+    float: right;
+    color: rgb(207, 78, 78);
+    background-color: hsl(48, 86%, 67%);
+    border: none;
+    outline: none;
 }
 /* main部分 */
 main {
     text-align:center;
-    margin-top: 100px;
+    margin:200px auto 0 auto;
     font-size:20px;
+    padding: 50px 0px;
+    width: 50%;
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.424);
+    box-shadow: 0px 0px 20px 2px  rgb(134, 54, 54));
 }
 main #wall div{
     margin-bottom: 10px;
